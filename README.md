@@ -39,15 +39,51 @@ This is 11th batch weekdays
         > single loop pattern
         > multiloop pattern
 > function
-> def
+    > def
+        >return 
+        > local variable
+        > local scope
+        > global variable
+        > global scope
+        > arguments:
+            >default argument
+            >positional argument
+            >keyword argument
+            >arbitrary positional argument
+            >arbitrary keyword argument
+    > nested function 
     > decorator
     > nested function
-> lambda
-
+    >generator(yield)
+> lambda(anonymous function)
 > multiasking
+    >Thread
+    >process
+    > Life cycle of Thread
+        > generate block
+        > runnable block
+        > running block
+        > blocked state
+        > terminate block
 > gc
 > regex
-> OOPS
+
+> programming paradigm:
+    > top line programming
+    > procedural programming/functional programming
+    > Object Oriented Programming structure
+> OOPs:
+    > class(blueprint)
+        > class variable
+        > instance variable
+        > class methods
+        > static methods.
+    > object
+    > encapsulation
+    > abstraction(project blueprint) 
+    > inheritance 
+    > polymorphism
+
 > blueprint(class)
     > constructor
         > instance variable
