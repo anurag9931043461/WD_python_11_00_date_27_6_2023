@@ -1,0 +1,314 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 22
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> -- show databases , schema
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| wd2                |
+| wd7                |
+| world              |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> -- creating a databases
+mysql> create database WD12;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| wd12               |
+| wd2                |
+| wd7                |
+| world              |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> show databaseS;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| wd12               |
+| wd2                |
+| wd7                |
+| world              |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> use wd12;
+Database changed
+mysql> show wd12;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'wd12' at line 1
+mysql> show database wd12;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database wd12' at line 1
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> create table restra(sn int,name varchar(50),bill float);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from restra;
+Empty set (0.00 sec)
+
+mysql> desc restra;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sn    | int         | YES  |     | NULL    |       |
+| name  | varchar(50) | YES  |     | NULL    |       |
+| bill  | float       | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into restra values(1,"Kunal",675.43);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from restra;
++------+-------+--------+
+| sn   | name  | bill   |
++------+-------+--------+
+|    1 | Kunal | 675.43 |
++------+-------+--------+
+1 row in set (0.00 sec)
+
+mysql> insert into restra values(2,"krishna",32.43),(3,"Rawat",3443.32),(4,"krishna",324.3);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from restra;
++------+---------+---------+
+| sn   | name    | bill    |
++------+---------+---------+
+|    1 | Kunal   |  675.43 |
+|    2 | krishna |   32.43 |
+|    3 | Rawat   | 3443.32 |
+|    4 | krishna |   324.3 |
++------+---------+---------+
+4 rows in set (0.00 sec)
+
+mysql> insert into restra values(5,"Manpreet",3232.43),(6,"Diya",34454.32),(7,"kashish",324324.3);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> insert into restra values(8,"Rana",534654.323);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from restra;
++------+----------+---------+
+| sn   | name     | bill    |
++------+----------+---------+
+|    1 | Kunal    |  675.43 |
+|    2 | krishna  |   32.43 |
+|    3 | Rawat    | 3443.32 |
+|    4 | krishna  |   324.3 |
+|    5 | Manpreet | 3232.43 |
+|    6 | Diya     | 34454.3 |
+|    7 | kashish  |  324324 |
+|    8 | Rana     |  534654 |
++------+----------+---------+
+8 rows in set (0.00 sec)
+
+mysql> insert into restra values(9,"",534.323);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from restra;
++------+----------+---------+
+| sn   | name     | bill    |
++------+----------+---------+
+|    1 | Kunal    |  675.43 |
+|    2 | krishna  |   32.43 |
+|    3 | Rawat    | 3443.32 |
+|    4 | krishna  |   324.3 |
+|    5 | Manpreet | 3232.43 |
+|    6 | Diya     | 34454.3 |
+|    7 | kashish  |  324324 |
+|    8 | Rana     |  534654 |
+|    9 |          | 534.323 |
++------+----------+---------+
+9 rows in set (0.00 sec)
+
+mysql> insert into restra(sn,name) values(10,"Mohan");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from restra;
++------+----------+---------+
+| sn   | name     | bill    |
++------+----------+---------+
+|    1 | Kunal    |  675.43 |
+|    2 | krishna  |   32.43 |
+|    3 | Rawat    | 3443.32 |
+|    4 | krishna  |   324.3 |
+|    5 | Manpreet | 3232.43 |
+|    6 | Diya     | 34454.3 |
+|    7 | kashish  |  324324 |
+|    8 | Rana     |  534654 |
+|    9 |          | 534.323 |
+|   10 | Mohan    |    NULL |
++------+----------+---------+
+10 rows in set (0.00 sec)
+
+mysql> insert into restra values(11,"Mohan");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into restra(sn,name) values("Mohan",11);
+ERROR 1366 (HY000): Incorrect integer value: 'Mohan' for column 'sn' at row 1
+mysql> insert into restra(sn,bill) values(43,11);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from restra;
++------+----------+---------+
+| sn   | name     | bill    |
++------+----------+---------+
+|    1 | Kunal    |  675.43 |
+|    2 | krishna  |   32.43 |
+|    3 | Rawat    | 3443.32 |
+|    4 | krishna  |   324.3 |
+|    5 | Manpreet | 3232.43 |
+|    6 | Diya     | 34454.3 |
+|    7 | kashish  |  324324 |
+|    8 | Rana     |  534654 |
+|    9 |          | 534.323 |
+|   10 | Mohan    |    NULL |
+|   43 | NULL     |      11 |
++------+----------+---------+
+11 rows in set (0.00 sec)
+
+mysql> -- where, and ,or
+mysql> update restra set name="Yuvraj" where bill=534.323;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from restra;
++------+----------+---------+
+| sn   | name     | bill    |
++------+----------+---------+
+|    1 | Kunal    |  675.43 |
+|    2 | krishna  |   32.43 |
+|    3 | Rawat    | 3443.32 |
+|    4 | krishna  |   324.3 |
+|    5 | Manpreet | 3232.43 |
+|    6 | Diya     | 34454.3 |
+|    7 | kashish  |  324324 |
+|    8 | Rana     |  534654 |
+|    9 |          | 534.323 |
+|   10 | Mohan    |    NULL |
+|   43 | NULL     |      11 |
++------+----------+---------+
+11 rows in set (0.00 sec)
+
+mysql> update restra set name="Yuvraj" where sn=9;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from restra;
++------+----------+---------+
+| sn   | name     | bill    |
++------+----------+---------+
+|    1 | Kunal    |  675.43 |
+|    2 | krishna  |   32.43 |
+|    3 | Rawat    | 3443.32 |
+|    4 | krishna  |   324.3 |
+|    5 | Manpreet | 3232.43 |
+|    6 | Diya     | 34454.3 |
+|    7 | kashish  |  324324 |
+|    8 | Rana     |  534654 |
+|    9 | Yuvraj   | 534.323 |
+|   10 | Mohan    |    NULL |
+|   43 | NULL     |      11 |
++------+----------+---------+
+11 rows in set (0.00 sec)
+
+mysql> update restra set bill=324.54 where sn=10;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from restra;
++------+----------+---------+
+| sn   | name     | bill    |
++------+----------+---------+
+|    1 | Kunal    |  675.43 |
+|    2 | krishna  |   32.43 |
+|    3 | Rawat    | 3443.32 |
+|    4 | krishna  |   324.3 |
+|    5 | Manpreet | 3232.43 |
+|    6 | Diya     | 34454.3 |
+|    7 | kashish  |  324324 |
+|    8 | Rana     |  534654 |
+|    9 | Yuvraj   | 534.323 |
+|   10 | Mohan    |  324.54 |
+|   43 | NULL     |      11 |
++------+----------+---------+
+11 rows in set (0.00 sec)
+
+mysql> update restra set sn=11,name="Manpreet" where sn=43;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from restra;
++------+----------+---------+
+| sn   | name     | bill    |
++------+----------+---------+
+|    1 | Kunal    |  675.43 |
+|    2 | krishna  |   32.43 |
+|    3 | Rawat    | 3443.32 |
+|    4 | krishna  |   324.3 |
+|    5 | Manpreet | 3232.43 |
+|    6 | Diya     | 34454.3 |
+|    7 | kashish  |  324324 |
+|    8 | Rana     |  534654 |
+|    9 | Yuvraj   | 534.323 |
+|   10 | Mohan    |  324.54 |
+|   11 | Manpreet |      11 |
++------+----------+---------+
+11 rows in set (0.00 sec)
+
+mysql> update restra set sn=11,name="Manpreet",bill=3423.43 where sn=11;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from restra;
++------+----------+---------+
+| sn   | name     | bill    |
++------+----------+---------+
+|    1 | Kunal    |  675.43 |
+|    2 | krishna  |   32.43 |
+|    3 | Rawat    | 3443.32 |
+|    4 | krishna  |   324.3 |
+|    5 | Manpreet | 3232.43 |
+|    6 | Diya     | 34454.3 |
+|    7 | kashish  |  324324 |
+|    8 | Rana     |  534654 |
+|    9 | Yuvraj   | 534.323 |
+|   10 | Mohan    |  324.54 |
+|   11 | Manpreet | 3423.43 |
++------+----------+---------+
+11 rows in set (0.00 sec)
+
+mysql>
