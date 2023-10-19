@@ -1,0 +1,272 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 27
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| wd12               |
+| wd2                |
+| wd7                |
+| world              |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> use wd12;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_wd12 |
++----------------+
+| restra         |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from restra;
++------+----------+---------+
+| sn   | name     | bill    |
++------+----------+---------+
+|    1 | Kunal    |  675.43 |
+|    2 | krishna  |   32.43 |
+|    3 | Rawat    | 3443.32 |
+|    4 | krishna  |   324.3 |
+|    5 | Manpreet | 3232.43 |
+|    6 | Diya     | 34454.3 |
+|    7 | kashish  |  324324 |
+|    8 | Rana     |  534654 |
+|    9 | Yuvraj   | 534.323 |
+|   10 | Mohan    |  324.54 |
+|   11 | Manpreet | 3423.43 |
++------+----------+---------+
+11 rows in set (0.00 sec)
+
+mysql> -- aggregate function(avg(),count(),sum(),max(),min(),distinct())
+mysql> select sum(bill) from restra;
++-------------------+
+| sum(bill)         |
++-------------------+
+| 905423.1482315063 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(bill) as 'total Bill' from restra;
++-------------------+
+| total Bill        |
++-------------------+
+| 905423.1482315063 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select max(bill) from restra;
++-----------+
+| max(bill) |
++-----------+
+|    534654 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select max(bill) as "Max payment" from restra;
++-------------+
+| Max payment |
++-------------+
+|      534654 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select min(bill) as "Minimum payment" from restra;
++-----------------+
+| Minimum payment |
++-----------------+
+|           32.43 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(bill) from restra;
++------------------+
+| avg(bill)        |
++------------------+
+| 82311.1952937733 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from restra;
++------+----------+---------+
+| sn   | name     | bill    |
++------+----------+---------+
+|    1 | Kunal    |  675.43 |
+|    2 | krishna  |   32.43 |
+|    3 | Rawat    | 3443.32 |
+|    4 | krishna  |   324.3 |
+|    5 | Manpreet | 3232.43 |
+|    6 | Diya     | 34454.3 |
+|    7 | kashish  |  324324 |
+|    8 | Rana     |  534654 |
+|    9 | Yuvraj   | 534.323 |
+|   10 | Mohan    |  324.54 |
+|   11 | Manpreet | 3423.43 |
++------+----------+---------+
+11 rows in set (0.00 sec)
+
+mysql> insert into restra values(12,"Bharat",32.43);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from restra;
++------+----------+---------+
+| sn   | name     | bill    |
++------+----------+---------+
+|    1 | Kunal    |  675.43 |
+|    2 | krishna  |   32.43 |
+|    3 | Rawat    | 3443.32 |
+|    4 | krishna  |   324.3 |
+|    5 | Manpreet | 3232.43 |
+|    6 | Diya     | 34454.3 |
+|    7 | kashish  |  324324 |
+|    8 | Rana     |  534654 |
+|    9 | Yuvraj   | 534.323 |
+|   10 | Mohan    |  324.54 |
+|   11 | Manpreet | 3423.43 |
+|   12 | Bharat   |   32.43 |
++------+----------+---------+
+12 rows in set (0.00 sec)
+
+mysql> select count(name) from restra;
++-------------+
+| count(name) |
++-------------+
+|          12 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select distinct(bill) from restra;
++---------+
+| bill    |
++---------+
+|  675.43 |
+|   32.43 |
+| 3443.32 |
+|   324.3 |
+| 3232.43 |
+| 34454.3 |
+|  324324 |
+|  534654 |
+| 534.323 |
+|  324.54 |
+| 3423.43 |
++---------+
+11 rows in set (0.00 sec)
+
+mysql> select distinct(name) from restra;
++----------+
+| name     |
++----------+
+| Kunal    |
+| krishna  |
+| Rawat    |
+| Manpreet |
+| Diya     |
+| kashish  |
+| Rana     |
+| Yuvraj   |
+| Mohan    |
+| Bharat   |
++----------+
+10 rows in set (0.00 sec)
+
+mysql> -- nested query
+mysql>
+mysql> select max(bill) from restra;
++-----------+
+| max(bill) |
++-----------+
+|    534654 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from restra where bill in (select max(bill) from restra);
++------+------+--------+
+| sn   | name | bill   |
++------+------+--------+
+|    8 | Rana | 534654 |
++------+------+--------+
+1 row in set (0.00 sec)
+
+mysql> select name from restra where bill in (select max(bill) from restra);
++------+
+| name |
++------+
+| Rana |
++------+
+1 row in set (0.00 sec)
+
+mysql> create table collage(Enrollment int primary key,Name varchar(50) not null,Branch varchar(20) not null,email varchar(50) unique);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc collage;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| Enrollment | int         | NO   | PRI | NULL    |       |
+| Name       | varchar(50) | NO   |     | NULL    |       |
+| Branch     | varchar(20) | NO   |     | NULL    |       |
+| email      | varchar(50) | YES  | UNI | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into collage values(1,"Ashish","BCA","ashish123@gmail.com");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from collage;
++------------+--------+--------+---------------------+
+| Enrollment | Name   | Branch | email               |
++------------+--------+--------+---------------------+
+|          1 | Ashish | BCA    | ashish123@gmail.com |
++------------+--------+--------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into collage(Enrollment,Branch,email) values(2,"BA","tinku123@gmail.com");
+ERROR 1364 (HY000): Field 'Name' doesn't have a default value
+mysql> insert into collage(Name,Branch,email) values("Tinku","BA","tinku123@gmail.com");
+ERROR 1364 (HY000): Field 'Enrollment' doesn't have a default value
+mysql> insert into collage(Enrollment,Name,Branch,email) values(1,"Tinku","BA","tinku123@gmail.com");
+ERROR 1062 (23000): Duplicate entry '1' for key 'collage.PRIMARY'
+mysql> insert into collage(Enrollment,Name,Branch,email) values(2,"Tinku","BA","tinku123@gmail.com");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from collage;
++------------+--------+--------+---------------------+
+| Enrollment | Name   | Branch | email               |
++------------+--------+--------+---------------------+
+|          1 | Ashish | BCA    | ashish123@gmail.com |
+|          2 | Tinku  | BA     | tinku123@gmail.com  |
++------------+--------+--------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into collage(Enrollment,Name,Branch) values(3,"Tinku","BA");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from collage;
++------------+--------+--------+---------------------+
+| Enrollment | Name   | Branch | email               |
++------------+--------+--------+---------------------+
+|          1 | Ashish | BCA    | ashish123@gmail.com |
+|          2 | Tinku  | BA     | tinku123@gmail.com  |
+|          3 | Tinku  | BA     | NULL                |
++------------+--------+--------+---------------------+
+3 rows in set (0.00 sec)
+
+mysql>

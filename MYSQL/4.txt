@@ -1,0 +1,220 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| wd12               |
+| wd2                |
+| wd5                |
+| wd7                |
+| we10               |
+| we2                |
+| we4                |
+| world              |
++--------------------+
+13 rows in set (0.00 sec)
+
+mysql> use wd12;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_wd12 |
++----------------+
+| college        |
+| restra         |
++----------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from college;
++------------+---------+--------+
+| enrollment | name    | branch |
++------------+---------+--------+
+|          1 | Krishna | MCA    |
+|          2 | Mohan   | BCA    |
+|          3 | Sohan   | BBA    |
+|          4 | Ranjeet | B Sc   |
++------------+---------+--------+
+4 rows in set (0.01 sec)
+
+mysql> select * from restra;
++----+---------------+---------------+---------+
+| sn | name_customer | single_mingle | bill    |
++----+---------------+---------------+---------+
+|  1 | Manpreet      | mingle        |    4500 |
+|  2 | Kashish       | single        |     100 |
+|  3 | Mujahid       | mingle        | 3100.34 |
++----+---------------+---------------+---------+
+3 rows in set (0.01 sec)
+
+mysql> insert into restra values(4,"Adarsh",0);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into restra values(4,"Adarsh","mingle",0);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from restra;
++----+---------------+---------------+---------+
+| sn | name_customer | single_mingle | bill    |
++----+---------------+---------------+---------+
+|  1 | Manpreet      | mingle        |    4500 |
+|  2 | Kashish       | single        |     100 |
+|  3 | Mujahid       | mingle        | 3100.34 |
+|  4 | Adarsh        | mingle        |       0 |
++----+---------------+---------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from restra where single_mingle="mingle";
++----+---------------+---------------+---------+
+| sn | name_customer | single_mingle | bill    |
++----+---------------+---------------+---------+
+|  1 | Manpreet      | mingle        |    4500 |
+|  3 | Mujahid       | mingle        | 3100.34 |
+|  4 | Adarsh        | mingle        |       0 |
++----+---------------+---------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> -- join : left join,right join, inner join, full join
+mysql> create table govt(emp_id int primary key,name char(50) not null,position tinytext(30) not null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(30) not null)' at line 1
+mysql> create table govt(emp_id int primary key,name char(50) not null,position varchar(30) not null);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table facility(emp int primary key, facility_name);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> create table facility(emp int primary key, facility_name varchar(50));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> alter table facility modify facility_name varchar(50) not null;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into govt values(1,"Kunal","IAS"),(2,"Manpreet","Collector"),(3,"Kashish","MCD"),(4,"Rawat","chef");
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> insert into facility values(1,"Accomodation");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into facility values(1,"Medical");
+ERROR 1062 (23000): Duplicate entry '1' for key 'facility.PRIMARY'
+mysql> select * from govt;
++--------+----------+-----------+
+| emp_id | name     | position  |
++--------+----------+-----------+
+|      1 | Kunal    | IAS       |
+|      2 | Manpreet | Collector |
+|      3 | Kashish  | MCD       |
+|      4 | Rawat    | chef      |
++--------+----------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from facility;
++-----+---------------+
+| emp | facility_name |
++-----+---------------+
+|   1 | Accomodation  |
++-----+---------------+
+1 row in set (0.00 sec)
+
+mysql> insert into facility values(4,"Medical");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from facility;
++-----+---------------+
+| emp | facility_name |
++-----+---------------+
+|   1 | Accomodation  |
+|   4 | Medical       |
++-----+---------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into facility values(20,"Accomodation");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from facility;
++-----+---------------+
+| emp | facility_name |
++-----+---------------+
+|   1 | Accomodation  |
+|   4 | Medical       |
+|  20 | Accomodation  |
++-----+---------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from govt inner join facility on govt.emp_id=facility.emp;
++--------+-------+----------+-----+---------------+
+| emp_id | name  | position | emp | facility_name |
++--------+-------+----------+-----+---------------+
+|      1 | Kunal | IAS      |   1 | Accomodation  |
+|      4 | Rawat | chef     |   4 | Medical       |
++--------+-------+----------+-----+---------------+
+2 rows in set (0.00 sec)
+
+mysql> select govt.emp_id,govt.name,govt.position,facility.facility_name from govt inner join facility on govt.emp_id=facility.emp;
++--------+-------+----------+---------------+
+| emp_id | name  | position | facility_name |
++--------+-------+----------+---------------+
+|      1 | Kunal | IAS      | Accomodation  |
+|      4 | Rawat | chef     | Medical       |
++--------+-------+----------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> select g.emp_id,g.name,g.position,f.facility_name from govt as g inner join facility as f on g.emp_id=f.emp;
++--------+-------+----------+---------------+
+| emp_id | name  | position | facility_name |
++--------+-------+----------+---------------+
+|      1 | Kunal | IAS      | Accomodation  |
+|      4 | Rawat | chef     | Medical       |
++--------+-------+----------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> select g.emp_id,g.name,g.position,f.facility_name from govt as g left join facility as f on g.emp_id=f.emp;
++--------+----------+-----------+---------------+
+| emp_id | name     | position  | facility_name |
++--------+----------+-----------+---------------+
+|      1 | Kunal    | IAS       | Accomodation  |
+|      2 | Manpreet | Collector | NULL          |
+|      3 | Kashish  | MCD       | NULL          |
+|      4 | Rawat    | chef      | Medical       |
++--------+----------+-----------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> select g.emp_id,g.name,g.position,f.facility_name from govt as g right join facility as f on g.emp_id=f.emp;
++--------+-------+----------+---------------+
+| emp_id | name  | position | facility_name |
++--------+-------+----------+---------------+
+|      1 | Kunal | IAS      | Accomodation  |
+|      4 | Rawat | chef     | Medical       |
+|   NULL | NULL  | NULL     | Accomodation  |
++--------+-------+----------+---------------+
+3 rows in set (0.00 sec)
+
+mysql> select g.emp_id,g.name,g.position,f.facility_name from govt as g left join facility as f on g.emp_id=f.emp union select g.emp_id,g.name,g.position,f.facility_name from govt as g right join facility as f on g.emp_id=f.emp;
++--------+----------+-----------+---------------+
+| emp_id | name     | position  | facility_name |
++--------+----------+-----------+---------------+
+|      1 | Kunal    | IAS       | Accomodation  |
+|      2 | Manpreet | Collector | NULL          |
+|      3 | Kashish  | MCD       | NULL          |
+|      4 | Rawat    | chef      | Medical       |
+|   NULL | NULL     | NULL      | Accomodation  |
++--------+----------+-----------+---------------+
+5 rows in set (0.00 sec)
+
+mysql>

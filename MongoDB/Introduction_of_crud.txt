@@ -1,0 +1,23 @@
+CRUD: 
+
+	Create:
+		> insertOne(data,option)
+		> insertMany([data,option])
+	
+	read:
+		> find()
+		> findOne(filter)
+	
+	update:
+		> updateOne(filter,data, option)
+		> updateMany(filter,data,option)
+		> replaceOne(filter,data,option)
+	Delete:
+		> deleteOne(filter, option)
+		> deleteMany(filter,option)
+
+>: gt
+>=: gte
+<: lt
+
+<=: lte

@@ -1,0 +1,115 @@
+test> use wd12
+switched to db wd12
+wd12> db.college.insertOne({name:"krishna",course:"AI"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("652656d8b48be0ec2df432fe")
+}
+wd12> db.college.insertOne({name:"kunal",course:"DA"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("65265741b48be0ec2df432ff")
+}
+wd12> db.college.insertOne({name:"manpreet",course:"DS"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("6526575eb48be0ec2df43300")
+}
+wd12> db.college.find()
+[
+  {
+    _id: ObjectId("652656d8b48be0ec2df432fe"),
+    name: 'krishna',
+    course: 'AI'
+  },
+  {
+    _id: ObjectId("65265741b48be0ec2df432ff"),
+    name: 'kunal',
+    course: 'DA'
+  },
+  {
+    _id: ObjectId("6526575eb48be0ec2df43300"),
+    name: 'manpreet',
+    course: 'DS'
+  }
+]
+wd12> db.college.insertOne({name:"Rawat",course:"TP"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("65265850b48be0ec2df43301")
+}
+wd12> db.college.insert
+db.college.insertMany  db.college.insertOne
+
+wd12> db.college.insert
+db.college.insertMany  db.college.insertOne
+
+wd12> db.college.insert
+db.college.insertMany  db.college.insertOne
+wd12> db.college.insertMany({name:"Rohan",course:"python"},{name:"Mohan",age:27})
+MongoInvalidArgumentError: Argument "docs" must be an array of documents
+wd12> db.college.insertMany([{name:"Rohan",course:"python"},{name:"Mohan",age:27}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("652659a1b48be0ec2df43302"),
+    '1': ObjectId("652659a1b48be0ec2df43303")
+  }
+}
+wd12> db.college.find()
+[
+  {
+    _id: ObjectId("652656d8b48be0ec2df432fe"),
+    name: 'krishna',
+    course: 'AI'
+  },
+  {
+    _id: ObjectId("65265741b48be0ec2df432ff"),
+    name: 'kunal',
+    course: 'DA'
+  },
+  {
+    _id: ObjectId("6526575eb48be0ec2df43300"),
+    name: 'manpreet',
+    course: 'DS'
+  },
+  {
+    _id: ObjectId("65265850b48be0ec2df43301"),
+    name: 'Rawat',
+    course: 'TP'
+  },
+  {
+    _id: ObjectId("652659a1b48be0ec2df43302"),
+    name: 'Rohan',
+    course: 'python'
+  },
+  { _id: ObjectId("652659a1b48be0ec2df43303"), name: 'Mohan', age: 27 }
+]
+wd12> db.college.findOne({name:"Mohan"})
+{ _id: ObjectId("652659a1b48be0ec2df43303"), name: 'Mohan', age: 27 }
+wd12> db.college.insertOne({name:"Mohan",course:"TP"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("65265a40b48be0ec2df43304")
+}
+wd12> db.college.find({name:"Mohan"})
+[
+  { _id: ObjectId("652659a1b48be0ec2df43303"), name: 'Mohan', age: 27 },
+  {
+    _id: ObjectId("65265a40b48be0ec2df43304"),
+    name: 'Mohan',
+    course: 'TP'
+  }
+]
+wd12> db.college.findOne({name:"Ravinder"})
+null
+wd12> db.college.find({name:"Ravinder"})
+
+wd12> db.college.find().count()
+7
+wd12> db.college.update
+db.college.updateMany         db.college.updateOne
+db.college.updateSearchIndex
+
+wd12> db.college.update
+

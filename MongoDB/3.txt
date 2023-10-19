@@ -1,0 +1,429 @@
+Microsoft Windows [Version 10.0.19045.3570]
+(c) Microsoft Corporation. All rights reserved.
+
+test> use wd9
+switched to db wd9
+wd9> show dbs
+admin    40.00 KiB
+config   72.00 KiB
+local    72.00 KiB
+wd12    144.00 KiB
+wd2      72.00 KiB
+wd7     144.00 KiB
+wd9> use wd12
+switched to db wd12
+wd12> show collections
+college
+population
+wd12> db.population.find()
+[
+  { _id: ObjectId("652ced8a0b37575752cb9d4e"), name: 'Rawat', age: 27 },
+  {
+    _id: ObjectId("652cee2b0b37575752cb9d4f"),
+    name: 'Manpreet',
+    age: 22
+  },
+  { _id: ObjectId("652cee9a0b37575752cb9d50"), name: 'Karan', age: 43 },
+  {
+    _id: ObjectId("652cee9a0b37575752cb9d51"),
+    name: 'Adarsh',
+    age: 20
+  },
+  {
+    _id: ObjectId("652ceeff0b37575752cb9d52"),
+    name: 'krishna',
+    age: 27,
+    passport: true
+  },
+  { _id: ObjectId("652cef280b37575752cb9d53"), name: 'krishna' }
+]
+wd12> db.population.find().count
+[Function: count] AsyncFunction {
+  deprecated: true,
+  returnsPromise: true,
+wd12>
+  apiVersions: [ 0, Infinity ],
+  topologies: [ 'ReplSet', 'Sharded', 'LoadBalanced', 'Standalone' ],
+  returnType: { type: 'unknown', attributes: {} },
+  platforms: [ 'Compass', 'Browser', 'CLI' ],
+  isDirectShellCommand: false,
+  acceptsRawInput: false,
+  shellCommandCompleter: undefined,
+  help: [Function (anonymous)] Help
+wd12> db.population.find().count()
+6
+wd12> db.population.find()
+[
+  { _id: ObjectId("652ced8a0b37575752cb9d4e"), name: 'Rawat', age: 27 },
+  {
+    _id: ObjectId("652cee2b0b37575752cb9d4f"),
+    name: 'Manpreet',
+    age: 22
+  },
+  { _id: ObjectId("652cee9a0b37575752cb9d50"), name: 'Karan', age: 43 },
+  {
+    _id: ObjectId("652cee9a0b37575752cb9d51"),
+    name: 'Adarsh',
+    age: 20
+  },
+  {
+    _id: ObjectId("652ceeff0b37575752cb9d52"),
+    name: 'krishna',
+    age: 27,
+    passport: true
+  },
+  { _id: ObjectId("652cef280b37575752cb9d53"), name: 'krishna' }
+]
+wd12> db.population.insertOne({name:"Abhishek Pahadi",age:21,idcard:{passport:true,aadhar_card:true,pancard:true}})
+{
+  acknowledged: true,
+  insertedId: ObjectId("652e35718a81226b28eb8f96")
+}
+wd12> db.population.insertOne({name:"Manpreet Ilahabadi",gym:"no gym",diet:{wed:"apple",thrus: "banana",sat:"orange"}})
+{
+  acknowledged: true,
+  insertedId: ObjectId("652e36df8a81226b28eb8f97")
+}
+wd12> db.population.find()
+[
+  { _id: ObjectId("652ced8a0b37575752cb9d4e"), name: 'Rawat', age: 27 },
+  {
+    _id: ObjectId("652cee2b0b37575752cb9d4f"),
+    name: 'Manpreet',
+    age: 22
+  },
+  { _id: ObjectId("652cee9a0b37575752cb9d50"), name: 'Karan', age: 43 },
+  {
+    _id: ObjectId("652cee9a0b37575752cb9d51"),
+    name: 'Adarsh',
+    age: 20
+  },
+  {
+    _id: ObjectId("652ceeff0b37575752cb9d52"),
+    name: 'krishna',
+    age: 27,
+    passport: true
+  },
+  { _id: ObjectId("652cef280b37575752cb9d53"), name: 'krishna' },
+  {
+    _id: ObjectId("652e35718a81226b28eb8f96"),
+    name: 'Abhishek Pahadi',
+    age: 21,
+    idcard: { passport: true, aadhar_card: true, pancard: true }
+  },
+  {
+    _id: ObjectId("652e36df8a81226b28eb8f97"),
+    name: 'Manpreet Ilahabadi',
+    gym: 'no gym',
+    diet: { wed: 'apple', thrus: 'banana', sat: 'orange' }
+  }
+]
+wd12> db.population.insertOne({name:"Abhishek Pahadi",age:21,idcard:{passport:true,aadhar_card:true,pancard:false}})
+{
+  acknowledged: true,
+  insertedId: ObjectId("652e375d8a81226b28eb8f98")
+}
+wd12> db.population.findOne({idcard.pancard:true})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:29)
+
+> 1 | db.population.findOne({idcard.pancard:true})
+    |                              ^
+  2 |
+
+wd12> db.population.findOne({'idcard.pancard':true})
+{
+  _id: ObjectId("652e35718a81226b28eb8f96"),
+  name: 'Abhishek Pahadi',
+  age: 21,
+  idcard: { passport: true, aadhar_card: true, pancard: true }
+}
+wd12> db.population.findOne({'idcard.pancard':false})
+{
+  _id: ObjectId("652e375d8a81226b28eb8f98"),
+  name: 'Abhishek Pahadi',
+  age: 21,
+  idcard: { passport: true, aadhar_card: true, pancard: false }
+}
+wd12> db.population.insert
+db.population.insertMany  db.population.insertOne
+
+wd12> db.population.find()
+[
+  { _id: ObjectId("652ced8a0b37575752cb9d4e"), name: 'Rawat', age: 27 },
+  {
+    _id: ObjectId("652cee2b0b37575752cb9d4f"),
+    name: 'Manpreet',
+    age: 22
+  },
+  { _id: ObjectId("652cee9a0b37575752cb9d50"), name: 'Karan', age: 43 },
+  {
+    _id: ObjectId("652cee9a0b37575752cb9d51"),
+    name: 'Adarsh',
+    age: 20
+  },
+  {
+    _id: ObjectId("652ceeff0b37575752cb9d52"),
+    name: 'krishna',
+    age: 27,
+    passport: true
+  },
+  { _id: ObjectId("652cef280b37575752cb9d53"), name: 'krishna' },
+  {
+    _id: ObjectId("652e35718a81226b28eb8f96"),
+    name: 'Abhishek Pahadi',
+    age: 21,
+    idcard: { passport: true, aadhar_card: true, pancard: true }
+  },
+  {
+    _id: ObjectId("652e36df8a81226b28eb8f97"),
+    name: 'Manpreet Ilahabadi',
+    gym: 'no gym',
+    diet: { wed: 'apple', thrus: 'banana', sat: 'orange' }
+  },
+  {
+    _id: ObjectId("652e375d8a81226b28eb8f98"),
+    name: 'Abhishek Pahadi',
+    age: 21,
+    idcard: { passport: true, aadhar_card: true, pancard: false }
+  }
+]
+wd12> db.population.find({age:{$gt:22}})
+[
+  { _id: ObjectId("652ced8a0b37575752cb9d4e"), name: 'Rawat', age: 27 },
+  { _id: ObjectId("652cee9a0b37575752cb9d50"), name: 'Karan', age: 43 },
+  {
+    _id: ObjectId("652ceeff0b37575752cb9d52"),
+    name: 'krishna',
+    age: 27,
+    passport: true
+  }
+]
+wd12> db.population.find({age:{$gte:22}})
+[
+  { _id: ObjectId("652ced8a0b37575752cb9d4e"), name: 'Rawat', age: 27 },
+  {
+    _id: ObjectId("652cee2b0b37575752cb9d4f"),
+    name: 'Manpreet',
+    age: 22
+  },
+  { _id: ObjectId("652cee9a0b37575752cb9d50"), name: 'Karan', age: 43 },
+  {
+    _id: ObjectId("652ceeff0b37575752cb9d52"),
+    name: 'krishna',
+    age: 27,
+    passport: true
+  }
+]
+wd12> db.population.find({age:{$lt:22}})
+[
+  {
+    _id: ObjectId("652cee9a0b37575752cb9d51"),
+    name: 'Adarsh',
+    age: 20
+  },
+  {
+    _id: ObjectId("652e35718a81226b28eb8f96"),
+    name: 'Abhishek Pahadi',
+    age: 21,
+    idcard: { passport: true, aadhar_card: true, pancard: true }
+  },
+  {
+    _id: ObjectId("652e375d8a81226b28eb8f98"),
+    name: 'Abhishek Pahadi',
+    age: 21,
+    idcard: { passport: true, aadhar_card: true, pancard: false }
+  }
+]
+wd12> db.population.find({age:{$lte:22}})
+[
+  {
+    _id: ObjectId("652cee2b0b37575752cb9d4f"),
+    name: 'Manpreet',
+    age: 22
+  },
+  {
+    _id: ObjectId("652cee9a0b37575752cb9d51"),
+    name: 'Adarsh',
+    age: 20
+  },
+  {
+    _id: ObjectId("652e35718a81226b28eb8f96"),
+    name: 'Abhishek Pahadi',
+    age: 21,
+    idcard: { passport: true, aadhar_card: true, pancard: true }
+  },
+  {
+    _id: ObjectId("652e375d8a81226b28eb8f98"),
+    name: 'Abhishek Pahadi',
+    age: 21,
+    idcard: { passport: true, aadhar_card: true, pancard: false }
+  }
+]
+wd12> db.population.find()
+[
+  { _id: ObjectId("652ced8a0b37575752cb9d4e"), name: 'Rawat', age: 27 },
+  {
+    _id: ObjectId("652cee2b0b37575752cb9d4f"),
+    name: 'Manpreet',
+    age: 22
+  },
+  { _id: ObjectId("652cee9a0b37575752cb9d50"), name: 'Karan', age: 43 },
+  {
+    _id: ObjectId("652cee9a0b37575752cb9d51"),
+    name: 'Adarsh',
+    age: 20
+  },
+  {
+    _id: ObjectId("652ceeff0b37575752cb9d52"),
+    name: 'krishna',
+    age: 27,
+    passport: true
+  },
+  { _id: ObjectId("652cef280b37575752cb9d53"), name: 'krishna' },
+  {
+    _id: ObjectId("652e35718a81226b28eb8f96"),
+    name: 'Abhishek Pahadi',
+    age: 21,
+    idcard: { passport: true, aadhar_card: true, pancard: true }
+  },
+  {
+    _id: ObjectId("652e36df8a81226b28eb8f97"),
+    name: 'Manpreet Ilahabadi',
+    gym: 'no gym',
+    diet: { wed: 'apple', thrus: 'banana', sat: 'orange' }
+  },
+  {
+    _id: ObjectId("652e375d8a81226b28eb8f98"),
+    name: 'Abhishek Pahadi',
+    age: 21,
+    idcard: { passport: true, aadhar_card: true, pancard: false }
+  }
+]
+wd12> db.population.find().limit(2)
+[
+  { _id: ObjectId("652ced8a0b37575752cb9d4e"), name: 'Rawat', age: 27 },
+  {
+    _id: ObjectId("652cee2b0b37575752cb9d4f"),
+    name: 'Manpreet',
+    age: 22
+  }
+]
+wd12> db.population.insert
+db.population.insertMany  db.population.insertOne
+
+wd12> db.population.insert({name:})
+Uncaught:
+SyntaxError: Unexpected token (1:27)
+
+> 1 | db.population.insert({name:})
+    |                            ^
+  2 |
+
+wd12> db.population.insert({name:"adarsh"})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMwd12>
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("652e3c2d8a81226b28eb8f99") }
+}
+wd12> db.population.updateOne({name:"Krishna"},{$set age:28})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:47)
+
+> 1 | db.population.updateOne({name:"Krishna"},{$set age:28})
+    |                                                ^
+  2 |
+
+wd12> db.population.updateOne({name:"Krishna"},{$set:{age:28}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+wd12> db.population.findOne({name:"krishna"})
+{
+  _id: ObjectId("652ceeff0b37575752cb9d52"),
+  name: 'krishna',
+  age: 27,
+  passport: true
+}
+wd12> db.population.findOne({name:"Krishna"})
+null
+wd12> db.population.updateOne({name:"krishna"},{$set:{age:28}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+wd12> db.population.updateMany({age:27},{$set:{age:28}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+wd12> db.population.find()
+[
+  { _id: ObjectId("652ced8a0b37575752cb9d4e"), name: 'Rawat', age: 28 },
+  {
+    _id: ObjectId("652cee2b0b37575752cb9d4f"),
+    name: 'Manpreet',
+    age: 22
+  },
+  { _id: ObjectId("652cee9a0b37575752cb9d50"), name: 'Karan', age: 43 },
+  {
+    _id: ObjectId("652cee9a0b37575752cb9d51"),
+    name: 'Adarsh',
+    age: 20
+  },
+  {
+    _id: ObjectId("652ceeff0b37575752cb9d52"),
+    name: 'krishna',
+    age: 28,
+    passport: true
+  },
+  { _id: ObjectId("652cef280b37575752cb9d53"), name: 'krishna' },
+  {
+    _id: ObjectId("652e35718a81226b28eb8f96"),
+    name: 'Abhishek Pahadi',
+    age: 21,
+    idcard: { passport: true, aadhar_card: true, pancard: true }
+  },
+  {
+    _id: ObjectId("652e36df8a81226b28eb8f97"),
+    name: 'Manpreet Ilahabadi',
+    gym: 'no gym',
+    diet: { wed: 'apple', thrus: 'banana', sat: 'orange' }
+  },
+  {
+    _id: ObjectId("652e375d8a81226b28eb8f98"),
+    name: 'Abhishek Pahadi',
+    age: 21,
+    idcard: { passport: true, aadhar_card: true, pancard: false }
+  },
+  { _id: ObjectId("652e3c2d8a81226b28eb8f99"), name: 'adarsh' }
+]
+wd12> db.population.updateMany({age:27},{$set:{age:110}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+wd12> db.population.updateMany({age:28},{$set:{age:110}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+wd12> db.population.deleteOne({name:"Abhishek Pahadi"})
+{ acknowledged: true, deletedCount: 1 }
+wd12>
